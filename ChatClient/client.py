@@ -48,6 +48,11 @@ class GraphicClient():
         self.entryPort.insert(0,'50000')
         self.entryPort.pack(padx = 5, pady = 5)
 
+        self.entryPseudo.bind('<Return>',lambda event: self.goAhead(self.entryPseudo.get(), self.entryIP.get(), self.entryPort.get()))
+        self.entryIP.bind('<Return>',lambda event: self.goAhead(self.entryPseudo.get(), self.entryIP.get(), self.entryPort.get()))
+        self.entryPort.bind('<Return>',lambda event: self.goAhead(self.entryPseudo.get(), self.entryIP.get(), self.entryPort.get()))
+
+
         # create a Continue Button
         # along with action
         self.go = Button(self.login,
@@ -137,7 +142,7 @@ class GraphicClient():
                             relx = 0.011)
          
         self.entryMsg.focus()
-         
+        self.entryMsg.bind('<Return>',lambda event: self.sendButton(self.entryMsg.get(), client))
         # create a Send Button
         self.buttonMsg = Button(self.labelBottom,
                                 text = "Send",
@@ -167,11 +172,12 @@ class GraphicClient():
  
     # function to basically start the thread for sending messages
     def sendButton(self, msg, client):
-        self.textCons.config(state = DISABLED)
-        self.msg=msg
-        self.entryMsg.delete(0, END)
-        snd= threading.Thread(target = lambda : self.sendMessage(client))
-        snd.start()
+        if msg != '' :
+            self.textCons.config(state = DISABLED)
+            self.msg=msg
+            self.entryMsg.delete(0, END)
+            snd= threading.Thread(target = lambda : self.sendMessage(client))
+            snd.start()
  
     # function to receive messages
     def receive(self, client):
