@@ -14,15 +14,15 @@ Max d'annonymat, aucune logs !
 
 Une fois le serveur lancé, celui-ci vous donnera l'IP de connexion ainsi que le port
 
-Insérer image serveur
+![image](https://user-images.githubusercontent.com/59097429/128608644-310009b1-a35e-418f-9d54-bcd1b28ee285.png)
 
 En suite, sur le client, entrez votre pseudo, l'IP du serveur et le port
 
-Insérer image pas de Login
+![image](https://user-images.githubusercontent.com/59097429/128608658-98be026a-cb69-48e4-a439-d929e4f7437c.png)
 
 Vous pouvez désormais chatter avec vos amis !
 
-insérer image chat
+![image](https://user-images.githubusercontent.com/59097429/128608698-edecc131-1311-41c7-9979-5753bb3d0452.png)
 
 # TODO
 - Vérifier si le pseudo n'est pas déjà connecté
