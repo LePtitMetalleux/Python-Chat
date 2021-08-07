@@ -9,3 +9,4 @@ Max d'annonymat, aucune logs !
 - Supprimer la fenêtre de login ? (Passer directement sur la fenêtre avec l'interface de tchat, faire un onglet "login")
 - Ajouts d'emotes et upload d'images
 - Canaux privés
+- Afficher un message d'erreur et renvoyer sur la page de login quand le pseudo est déjà connecté

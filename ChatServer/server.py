@@ -3,6 +3,7 @@ import socket
 
 # import threading library
 import threading
+from tkinter.constants import N
 
 # Choose a port that is free
 PORT = 50000
@@ -32,7 +33,7 @@ server.bind(('', 50000))
 # function to start the connection
 def startChat():
 
-	print("Server is working on " + SERVER)
+	print("Le serveur tourne sur l'IP suivante : " + SERVER)
 	
 	# listening for connections
 	server.listen()
@@ -49,32 +50,36 @@ def startChat():
 		# of data that can be received (bytes)
 		name = conn.recv(1024).decode(FORMAT)
 		
-		# append the name and client
-		# to the respective list
-		names.append(name)
-		clients.append(conn)
+		# Check if the name isn't already used
+		if name in names:
+			conn.send("PSEUDOREFUSED".encode(FORMAT))
+		else:
+			# append the name and client
+			# to the respective list
+			names.append(name)
+			clients.append(conn)
 		
-		print(f"Name is :{name}")
+			# print(f"{name} a rejoint le chat!")
+			# broadcast message
+			broadcastMessage(f"{name} a rejoint le chat!".encode(FORMAT))
 		
-		# broadcast message
-		broadcastMessage(f"{name} has joined the chat!".encode(FORMAT))
-		
-		conn.send('Connection successful!'.encode(FORMAT))
-		
-		# Start the handling thread
-		thread = threading.Thread(target = handle,
-								args = (conn, addr))
-		thread.start()
-		
-		# no. of clients connected
-		# to the server
-		print(f"active connections {threading.activeCount()-1}")
+			conn.send('Connexion établie !'.encode(FORMAT))
+			
+			# Start the handling thread
+			thread = threading.Thread(target = handle,
+									args = (conn, addr))
+									
+			thread.start()
+			
+			# no. of clients connected
+			# to the server
+			# print(f"Connexion actives {threading.activeCount()-1}")
 
 # method to handle the
 # incoming messages
 def handle(conn, addr):
 
-	print(f"new connection {addr}")
+	# print(f"Nouvelle connexion {addr}")
 	connected = True
 	
 	while connected:
